@@ -31,6 +31,39 @@
     </div>
     <script>
         // JavaScript code to handle resource filtering and dynamic resource list
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterInput = document.getElementById('filter');
+            const resourceList = document.getElementById('resources');
+
+            const resources = [
+                { name: 'Mental Health Support Group', category: 'Mental Health' },
+                { name: 'Substance Abuse Counseling', category: 'Substance Use' },
+                { name: 'Trauma Recovery Center', category: 'Trauma' },
+                { name: 'Housing Assistance Program', category: 'Housing' },
+                { name: 'Community Health Clinic', category: 'Health' },
+                { name: 'Job Training and Placement', category: 'Employment' }
+            ];
+
+            function displayResources(filteredResources) {
+                resourceList.innerHTML = '';
+                filteredResources.forEach(resource => {
+                    const li = document.createElement('li');
+                    li.textContent = `${resource.name} (${resource.category})`;
+                    resourceList.appendChild(li);
+                });
+            }
+
+            filterInput.addEventListener('input', function() {
+                const keyword = filterInput.value.toLowerCase();
+                const filteredResources = resources.filter(resource => 
+                    resource.name.toLowerCase().includes(keyword) || 
+                    resource.category.toLowerCase().includes(keyword)
+                );
+                displayResources(filteredResources);
+            });
+
+            displayResources(resources);
+        });
     </script>
 </body>
 </html>
