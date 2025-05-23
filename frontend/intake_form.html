@@ -6,6 +6,8 @@
     <title>Intake Form</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
+    <script src="multi_language_support.js" defer></script>
+    <script src="voice_input.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -20,56 +22,56 @@
             <div class="section mental-health">
                 <h2>Mental Health</h2>
                 <div class="question">
-                    <label for="question_1">Do you often feel sad or depressed?</label>
+                    <label for="question_1">Do you often feel sad or depressed? <span class="tooltip" data-tooltip="Feeling sad or depressed can be a sign of mental health issues."></span></label>
                     <input type="radio" name="responses[1]" id="question_1_yes" value="yes">
                     <label for="question_1_yes">Yes</label>
                     <input type="radio" name="responses[1]" id="question_1_no" value="no">
                     <label for="question_1_no">No</label>
                 </div>
                 <div class="question">
-                    <label for="question_2">How often do you feel anxious?</label>
+                    <label for="question_2">How often do you feel anxious? <span class="tooltip" data-tooltip="Anxiety can manifest in various ways, including physical symptoms."></span></label>
                     <input type="range" name="responses[2]" id="question_2" min="1" max="5">
                 </div>
             </div>
             <div class="section substance-use">
                 <h2>Substance Use</h2>
                 <div class="question">
-                    <label for="question_3">Do you use any substances (e.g., alcohol, drugs)?</label>
+                    <label for="question_3">Do you use any substances (e.g., alcohol, drugs)? <span class="tooltip" data-tooltip="Substance use can impact mental and physical health."></span></label>
                     <input type="radio" name="responses[3]" id="question_3_yes" value="yes">
                     <label for="question_3_yes">Yes</label>
                     <input type="radio" name="responses[3]" id="question_3_no" value="no">
                     <label for="question_3_no">No</label>
                 </div>
                 <div class="question">
-                    <label for="question_4">How often do you use substances?</label>
+                    <label for="question_4">How often do you use substances? <span class="tooltip" data-tooltip="Frequency of substance use can indicate the level of dependency."></span></label>
                     <input type="range" name="responses[4]" id="question_4" min="1" max="5">
                 </div>
             </div>
             <div class="section trauma-history">
                 <h2>Trauma History</h2>
                 <div class="question">
-                    <label for="question_5">Have you experienced any traumatic events?</label>
+                    <label for="question_5">Have you experienced any traumatic events? <span class="tooltip" data-tooltip="Traumatic events can have long-lasting effects on mental health."></span></label>
                     <input type="radio" name="responses[5]" id="question_5_yes" value="yes">
                     <label for="question_5_yes">Yes</label>
                     <input type="radio" name="responses[5]" id="question_5_no" value="no">
                     <label for="question_5_no">No</label>
                 </div>
                 <div class="question">
-                    <label for="question_6">Please describe any traumatic events you have experienced:</label>
+                    <label for="question_6">Please describe any traumatic events you have experienced: <span class="tooltip" data-tooltip="Providing details can help us understand your experiences better."></span></label>
                     <textarea name="responses[6]" id="question_6"></textarea>
                 </div>
             </div>
             <div class="section housing-situation">
                 <h2>Housing Situation</h2>
                 <div class="question">
-                    <label for="question_7">Is your housing situation stable?</label>
+                    <label for="question_7">Is your housing situation stable? <span class="tooltip" data-tooltip="Stable housing is important for overall well-being."></span></label>
                     <input type="radio" name="responses[7]" id="question_7_yes" value="yes">
                     <label for="question_7_yes">Yes</label>
                     <input type="radio" name="responses[7]" id="question_7_no" value="no">
                     <label for="question_7_no">No</label>
                 </div>
                 <div class="question">
-                    <label for="question_8">Please describe your current housing situation:</label>
+                    <label for="question_8">Please describe your current housing situation: <span class="tooltip" data-tooltip="Providing details can help us understand your needs better."></span></label>
                     <textarea name="responses[8]" id="question_8"></textarea>
                 </div>
             </div>
@@ -78,6 +80,15 @@
                 <button type="submit" class="next">Next</button>
             </div>
         </form>
+        <div class="crisis-resources">
+            <h2>Crisis Resources</h2>
+            <ul>
+                <li><a href="tel:123-456-7890">Crisis Hotline: 123-456-7890</a></li>
+                <li><a href="https://www.crisistextline.org/">Crisis Text Line</a></li>
+                <li><a href="https://suicidepreventionlifeline.org/">Suicide Prevention Lifeline</a></li>
+                <li><a href="https://www.samhsa.gov/find-help/national-helpline">SAMHSA National Helpline</a></li>
+            </ul>
+        </div>
     </div>
     <script>
         // JavaScript code for progress tracking, timeout warning, and auto-save functionality
