@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Intake Web Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <select id="theme-switcher">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="professional">Professional</option>
+                        <option value="tech">Tech</option>
+                        <option value="futuristic">Futuristic</option>
+                        <option value="wacky">Wacky</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Consent Form</h1>
+            <form id="consent-form" action="backend/user_registration.php" method="POST">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+                
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+                
+                <label for="date_of_birth">Date of Birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="password_confirmation">Confirm Password:</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" required>
+                
+                <label for="consent">I agree to the terms of consent:</label>
+                <input type="checkbox" id="consent" name="consent" required>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.getElementById('consent-form').addEventListener('submit', function(event) {
+            if (!confirm('Are you sure you want to submit the form?')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

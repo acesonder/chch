@@ -1,146 +1,65 @@
-it's time to make the change, ifnrom and react to the support you get.
+name: CI/CD Pipeline
 
-I need a web app that uses SQL, PHP, HTML, CSS, and JavaScript; it must be mobile-responsive, with a top-bar navigation containing an option to switch between LIGHT, DARK, PROFESSIONAL, TECH, FUTURISTIC, and WACKY UI/UX themes, complete with animations.
-\
-The main page will feature a consent form asking for First Name, Last Name, Date of Birth, Password, and Password Confirmation, along with checkboxes to agree to the terms of consent (on this day: [current date]). Upon submission, the app will generate a username using the first three letters of the first name, the first three letters of the last name, and the last two digits of the birth year—e.g., Michael Brown, born May 6, 1984, becomes MICBRO84.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-After successful account creation, the user will be directed to a new window displaying their unique username. The intake form that follows will save progress at every step, reminding users that all questions are optional but that the more they answer, the better understanding and assistance we can provide.
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-Next, the smart intake form will ask up to 50 questions, all multiple-choice (yes/no), and conclude with a couple of open-ended questions covering mental health, substance use, trauma, and housing. This form will help us evaluate and rate each user, providing a written summary of their needs, the support required, and the severity of the issues they face, as well as the level of help they can handle.
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-Mental Health Intake Web Application Specification
-Project Overview
-Create a comprehensive mental health intake web application with user registration, consent management, and a smart assessment form. The application will evaluate user needs related to mental health, substance use, trauma, and housing, generating a detailed support recommendation report.
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
 
-Technical Requirements
-Backend: PHP with MySQL/MariaDB database
-Frontend: HTML5, CSS3, JavaScript (vanilla or framework of your choice)
-Responsive design (mobile-first approach)
-Secure authentication system
-Data validation and sanitization
-Cross-browser compatibility
-Accessibility compliance (WCAG 2.1 AA)
-Database Structure
-Create a database schema with these primary tables:
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y php-mysql
+        composer install
 
-users - Store user credentials and basic information
-responses - Store intake form responses
-assessments - Store generated assessment reports
-themes - Store theme configurations
-Core Features
-1. User Registration & Consent Form
-Create a responsive form collecting:
-First name (required)
-Last name (required)
-Date of birth (required, with date picker)
-Password (required, with strength meter)
-Password confirmation
-Consent checkboxes with timestamp
-Auto-generate username using this algorithm:
-First 3 letters of first name (uppercase)
-First 3 letters of last name (uppercase)
-Last 2 digits of birth year
-Example: "Michael Brown 1984" becomes "MICBRO84"
-Implement real-time validation
-Store user data securely (hash passwords, encrypt sensitive data)
-2. Theme Switcher
-Implement a theme system with these options:
+    - name: Set up database schema
+      run: |
+        mysql -u root -e "CREATE DATABASE mental_health_intake;"
+        mysql -u root mental_health_intake < database/schema.sql
 
-Light (default)
-Dark
-Professional
-Tech
-Futuristic
-Wacky
-Each theme should modify:
+    - name: Optimize database queries
+      run: |
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE users;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE responses;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE assessments;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE themes;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE questions;"
 
-Color scheme
-Typography
-Element styling
-Animation preferences
-Ensure proper contrast ratios for accessibility
-3. Smart Intake Form
-Create a multi-step assessment with:
+    - name: Implement caching mechanisms
+      run: |
+        sudo apt-get install -y memcached
+        sudo systemctl start memcached
+        sudo systemctl enable memcached
 
-Progress tracking (save after each section)
-40-50 questions divided into sections:
-Mental Health (depression, anxiety, etc.)
-Substance Use (patterns, frequency, impacts)
-Trauma History (with appropriate sensitivity)
-Housing Situation (stability, safety, needs)
-Question types:
-Multiple choice (single/multiple answers)
-Yes/No questions
-Likert scales (1-5 or 1-7)
-2-3 open-ended questions at the end
-Clear instructions that all questions are optional
-Back/forward navigation without losing data
-Timeout warning and auto-save
-4. Assessment Algorithm
-Develop an algorithm that:
+    - name: Minimize and optimize images
+      run: |
+        find . -name "*.jpg" -o -name "*.png" | xargs optipng -o7
+        find . -name "*.jpg" -o -name "*.jpeg" | xargs jpegoptim --max=85
 
-Weights responses based on severity
-Identifies patterns across question categories
-Generates a comprehensive assessment including:
-Summary of needs
-Recommended support services
-Priority areas for intervention
-Severity ratings by category
-Stores assessment results securely
-5. User Interface Requirements
-Clean, distraction-free design
-Top navigation bar with:
-Logo/branding
-Theme selector dropdown
-Progress indicator
-Save/exit functionality
-Help/support link
-Clear section headers and question grouping
-Appropriate white space and readability
-Subtle animations for transitions
-Mobile-optimized input controls
-Security Considerations
-HTTPS implementation
-CSRF protection
-XSS prevention
-Input validation and sanitization
-Database query parameterization
-Session management
-GDPR/HIPAA compliance for health data
-Data encryption at rest and in transit
-Regular security audits
-Implementation Plan
-Create database schema
-Develop user registration and authentication
-Implement theme system
-Build multi-step intake form
-Develop assessment algorithm
-Create admin dashboard (optional)
-Implement data export functionality (optional)
-Conduct testing (security, usability, accessibility)
-Deploy and monitor
-Additional Enhancements to Consider
-Integration with calendar for appointment scheduling
-Resource directory with filtering
-Crisis resources with quick access
-Progress tracking over time
-PDF export of assessment results
-SMS/email reminders for incomplete assessments
-Anonymous assessment option
-Multi-language support
-Dark pattern avoidance
-Voice input options for accessibility
-Design Templates to Consider
-Material Design
-Neumorphism
-Clean Medical
-Wellness/Mindfulness
-Government/Healthcare
-Accessibility-focused
-Platform Extensions
-Mobile app versions (iOS/Android)
-Integration with EHR/EMR systems
-Telehealth platform connections
-Community resource directory API connections
-Crisis hotline integration
-Wearable device data import
+    - name: Use CDN for static assets
+      run: |
+        echo "Using CDN for static assets"
+        # Add your CDN configuration here
+
+    - name: Run tests
+      run: |
+        vendor/bin/phpunit tests
+
+    - name: Deploy to server
+      run: |
+        rsync -avz --exclude '.git' --exclude 'tests' . user@server:/path/to/deploy

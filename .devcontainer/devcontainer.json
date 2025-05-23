@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "test": "composer install && vendor/bin/phpunit tests",
+    "build": "composer install",
+    "launch": "cd backend && php -S localhost:8000 && cd ../frontend && npx serve"
+  }
+}
