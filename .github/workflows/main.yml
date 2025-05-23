@@ -32,6 +32,30 @@ jobs:
         mysql -u root -e "CREATE DATABASE mental_health_intake;"
         mysql -u root mental_health_intake < database/schema.sql
 
+    - name: Optimize database queries
+      run: |
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE users;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE responses;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE assessments;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE themes;"
+        mysql -u root mental_health_intake -e "OPTIMIZE TABLE questions;"
+
+    - name: Implement caching mechanisms
+      run: |
+        sudo apt-get install -y memcached
+        sudo systemctl start memcached
+        sudo systemctl enable memcached
+
+    - name: Minimize and optimize images
+      run: |
+        find . -name "*.jpg" -o -name "*.png" | xargs optipng -o7
+        find . -name "*.jpg" -o -name "*.jpeg" | xargs jpegoptim --max=85
+
+    - name: Use CDN for static assets
+      run: |
+        echo "Using CDN for static assets"
+        # Add your CDN configuration here
+
     - name: Run tests
       run: |
         vendor/bin/phpunit tests
