@@ -32,7 +32,50 @@
     </div>
     <script>
         // JavaScript code to fetch and display assessment results
-        // JavaScript code to handle PDF export functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const summary = document.getElementById('summary');
+            const recommendations = document.getElementById('recommendations');
+            const priorityAreas = document.getElementById('priority-areas');
+            const severityRatings = document.getElementById('severity-ratings');
+            const exportPdfButton = document.getElementById('export-pdf');
+
+            // Fetch assessment results from the server
+            fetch('/backend/get_assessment_results.php')
+                .then(response => response.json())
+                .then(data => {
+                    summary.textContent = data.summary;
+                    recommendations.textContent = data.recommendations;
+                    priorityAreas.textContent = data.priority_areas;
+                    severityRatings.textContent = data.severity_ratings;
+                })
+                .catch(error => {
+                    console.error('Error fetching assessment results:', error);
+                });
+
+            // Handle PDF export functionality
+            exportPdfButton.addEventListener('click', function() {
+                fetch('/backend/export_assessment_as_pdf.php')
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        } else {
+                            throw new Error('Failed to export PDF');
+                        }
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'assessment_results.pdf';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                    })
+                    .catch(error => {
+                        console.error('Error exporting PDF:', error);
+                    });
+            });
+        });
     </script>
 </body>
 </html>

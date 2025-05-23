@@ -52,6 +52,36 @@
                 <button type="submit">Submit</button>
             </form>
         </section>
+        <section>
+            <h1>Theme Editor</h1>
+            <form id="theme-editor-form" action="backend/save_custom_theme.php" method="POST">
+                <label for="custom-bg-color">Background Color:</label>
+                <input type="color" id="custom-bg-color" name="custom_bg_color" required>
+                
+                <label for="custom-text-color">Text Color:</label>
+                <input type="color" id="custom-text-color" name="custom_text_color" required>
+                
+                <label for="custom-font-family">Font Family:</label>
+                <input type="text" id="custom-font-family" name="custom_font_family" required>
+                
+                <label for="custom-header-bg-color">Header Background Color:</label>
+                <input type="color" id="custom-header-bg-color" name="custom_header_bg_color" required>
+                
+                <label for="custom-header-text-color">Header Text Color:</label>
+                <input type="color" id="custom-header-text-color" name="custom_header_text_color" required>
+                
+                <label for="custom-input-bg-color">Input Background Color:</label>
+                <input type="color" id="custom-input-bg-color" name="custom_input_bg_color" required>
+                
+                <label for="custom-input-text-color">Input Text Color:</label>
+                <input type="color" id="custom-input-text-color" name="custom_input_text_color" required>
+                
+                <label for="custom-input-border-color">Input Border Color:</label>
+                <input type="color" id="custom-input-border-color" name="custom_input_border_color" required>
+                
+                <button type="submit">Save Custom Theme</button>
+            </form>
+        </section>
     </main>
     <script>
         document.getElementById('consent-form').addEventListener('submit', function(event) {

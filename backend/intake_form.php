@@ -61,5 +61,55 @@ $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <button type="submit">Next</button>
         </form>
     </div>
+    <script>
+        // JavaScript code for progress tracking, timeout warning, and auto-save functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const questions = form.querySelectorAll('.question');
+            const totalQuestions = questions.length;
+            let answeredQuestions = 0;
+
+            function updateProgress() {
+                const percentage = (answeredQuestions / totalQuestions) * 100;
+                document.querySelector('.progress').style.width = `${percentage}%`;
+            }
+
+            function saveProgress() {
+                const formData = new FormData(form);
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'save_progress.php', true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        console.log('Progress saved successfully');
+                    } else {
+                        console.error('Failed to save progress');
+                    }
+                };
+                xhr.send(formData);
+            }
+
+            form.addEventListener('change', function(event) {
+                if (event.target.closest('.question')) {
+                    answeredQuestions = Array.from(questions).filter(question => {
+                        const inputs = question.querySelectorAll('input, textarea, select');
+                        return Array.from(inputs).some(input => input.value.trim() !== '');
+                    }).length;
+                    updateProgress();
+                    saveProgress();
+                }
+            });
+
+            function showTimeoutWarning() {
+                alert('Your session is about to expire. Please save your progress.');
+            }
+
+            function autoSave() {
+                saveProgress();
+            }
+
+            setInterval(showTimeoutWarning, 15 * 60 * 1000); // Show timeout warning every 15 minutes
+            setInterval(autoSave, 5 * 60 * 1000); // Auto-save progress every 5 minutes
+        });
+    </script>
 </body>
 </html>

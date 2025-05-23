@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'utils.php';
+require_once 'vendor/autoload.php'; // For PDF generation
 
 function weight_responses($responses) {
     $weights = [
@@ -62,5 +63,33 @@ function store_assessment($user_id, $assessment) {
 
     $stmt = $pdo->prepare("INSERT INTO assessments (user_id, summary, recommendations, priority_areas, severity_ratings, created_at, updated_at) VALUES (?, ?, ?, ?, ?, NOW(), NOW())");
     $stmt->execute([$user_id, $assessment['summary'], $assessment['recommendations'], $assessment['priority_areas'], $assessment['severity_ratings']]);
+}
+
+function export_assessment_as_pdf($assessment) {
+    $mpdf = new \Mpdf\Mpdf();
+    $html = "<h1>Assessment Results</h1>";
+    $html .= "<h2>Summary of Needs</h2><p>{$assessment['summary']}</p>";
+    $html .= "<h2>Recommended Support Services</h2><p>{$assessment['recommendations']}</p>";
+    $html .= "<h2>Priority Areas for Intervention</h2><p>{$assessment['priority_areas']}</p>";
+    $html .= "<h2>Severity Ratings by Category</h2><p>{$assessment['severity_ratings']}</p>";
+    $mpdf->WriteHTML($html);
+    $mpdf->Output('assessment_results.pdf', 'D');
+}
+
+function send_reminder_for_incomplete_assessments($user_id) {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT email FROM users WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $to = $user['email'];
+        $subject = "Reminder: Incomplete Assessment";
+        $message = "Dear user, you have an incomplete assessment. Please complete it as soon as possible.";
+        $headers = "From: no-reply@mentalhealthapp.com";
+
+        mail($to, $subject, $message, $headers);
+    }
 }
 ?>
