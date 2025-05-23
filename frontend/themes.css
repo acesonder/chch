@@ -1,0 +1,194 @@
+/* LIGHT Theme */
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Arial, sans-serif;
+}
+
+header.light, nav.light, footer.light {
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+button.light, input.light, select.light, textarea.light {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+}
+
+/* DARK Theme */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+header.dark, nav.dark, footer.dark {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+button.dark, input.dark, select.dark, textarea.dark {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+}
+
+/* PROFESSIONAL Theme */
+body.professional {
+    background-color: #f5f5f5;
+    color: #333333;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+header.professional, nav.professional, footer.professional {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+button.professional, input.professional, select.professional, textarea.professional {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #dddddd;
+}
+
+/* TECH Theme */
+body.tech {
+    background-color: #0d0d0d;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+}
+
+header.tech, nav.tech, footer.tech {
+    background-color: #1a1a1a;
+    color: #00ff00;
+}
+
+button.tech, input.tech, select.tech, textarea.tech {
+    background-color: #262626;
+    color: #00ff00;
+    border: 1px solid #333333;
+}
+
+/* FUTURISTIC Theme */
+body.futuristic {
+    background-color: #000000;
+    color: #00ffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+header.futuristic, nav.futuristic, footer.futuristic {
+    background-color: #0d0d0d;
+    color: #00ffff;
+}
+
+button.futuristic, input.futuristic, select.futuristic, textarea.futuristic {
+    background-color: #1a1a1a;
+    color: #00ffff;
+    border: 1px solid #262626;
+}
+
+/* WACKY Theme */
+body.wacky {
+    background-color: #ff00ff;
+    color: #00ff00;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+header.wacky, nav.wacky, footer.wacky {
+    background-color: #ff69b4;
+    color: #00ff00;
+}
+
+button.wacky, input.wacky, select.wacky, textarea.wacky {
+    background-color: #ff1493;
+    color: #00ff00;
+    border: 1px solid #ff69b4;
+}
+
+/* Customizable Themes */
+body.custom {
+    background-color: var(--custom-bg-color);
+    color: var(--custom-text-color);
+    font-family: var(--custom-font-family);
+}
+
+header.custom, nav.custom, footer.custom {
+    background-color: var(--custom-header-bg-color);
+    color: var(--custom-header-text-color);
+}
+
+button.custom, input.custom, select.custom, textarea.custom {
+    background-color: var(--custom-input-bg-color);
+    color: var(--custom-input-text-color);
+    border: 1px solid var(--custom-input-border-color);
+}
+
+/* Seasonal Themes */
+body.spring {
+    background-color: #e0ffe0;
+    color: #006400;
+    font-family: 'Arial', sans-serif;
+}
+
+header.spring, nav.spring, footer.spring {
+    background-color: #98fb98;
+    color: #006400;
+}
+
+button.spring, input.spring, select.spring, textarea.spring {
+    background-color: #90ee90;
+    color: #006400;
+    border: 1px solid #8fbc8f;
+}
+
+body.summer {
+    background-color: #fffacd;
+    color: #ff8c00;
+    font-family: 'Arial', sans-serif;
+}
+
+header.summer, nav.summer, footer.summer {
+    background-color: #ffd700;
+    color: #ff8c00;
+}
+
+button.summer, input.summer, select.summer, textarea.summer {
+    background-color: #ffebcd;
+    color: #ff8c00;
+    border: 1px solid #ffa07a;
+}
+
+body.fall {
+    background-color: #ffebcd;
+    color: #8b4513;
+    font-family: 'Arial', sans-serif;
+}
+
+header.fall, nav.fall, footer.fall {
+    background-color: #d2691e;
+    color: #8b4513;
+}
+
+button.fall, input.fall, select.fall, textarea.fall {
+    background-color: #f4a460;
+    color: #8b4513;
+    border: 1px solid #cd853f;
+}
+
+body.winter {
+    background-color: #f0f8ff;
+    color: #4682b4;
+    font-family: 'Arial', sans-serif;
+}
+
+header.winter, nav.winter, footer.winter {
+    background-color: #b0e0e6;
+    color: #4682b4;
+}
+
+button.winter, input.winter, select.winter, textarea.winter {
+    background-color: #add8e6;
+    color: #4682b4;
+    border: 1px solid #87ceeb;
+}

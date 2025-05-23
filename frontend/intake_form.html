@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intake Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Intake Form</h1>
+        <form action="intake_form.php" method="POST">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="instructions">
+                <p>All questions are optional. The more you answer, the better understanding and assistance we can provide.</p>
+            </div>
+            <div class="section mental-health">
+                <h2>Mental Health</h2>
+                <div class="question">
+                    <label for="question_1">Do you often feel sad or depressed?</label>
+                    <input type="radio" name="responses[1]" id="question_1_yes" value="yes">
+                    <label for="question_1_yes">Yes</label>
+                    <input type="radio" name="responses[1]" id="question_1_no" value="no">
+                    <label for="question_1_no">No</label>
+                </div>
+                <div class="question">
+                    <label for="question_2">How often do you feel anxious?</label>
+                    <input type="range" name="responses[2]" id="question_2" min="1" max="5">
+                </div>
+            </div>
+            <div class="section substance-use">
+                <h2>Substance Use</h2>
+                <div class="question">
+                    <label for="question_3">Do you use any substances (e.g., alcohol, drugs)?</label>
+                    <input type="radio" name="responses[3]" id="question_3_yes" value="yes">
+                    <label for="question_3_yes">Yes</label>
+                    <input type="radio" name="responses[3]" id="question_3_no" value="no">
+                    <label for="question_3_no">No</label>
+                </div>
+                <div class="question">
+                    <label for="question_4">How often do you use substances?</label>
+                    <input type="range" name="responses[4]" id="question_4" min="1" max="5">
+                </div>
+            </div>
+            <div class="section trauma-history">
+                <h2>Trauma History</h2>
+                <div class="question">
+                    <label for="question_5">Have you experienced any traumatic events?</label>
+                    <input type="radio" name="responses[5]" id="question_5_yes" value="yes">
+                    <label for="question_5_yes">Yes</label>
+                    <input type="radio" name="responses[5]" id="question_5_no" value="no">
+                    <label for="question_5_no">No</label>
+                </div>
+                <div class="question">
+                    <label for="question_6">Please describe any traumatic events you have experienced:</label>
+                    <textarea name="responses[6]" id="question_6"></textarea>
+                </div>
+            </div>
+            <div class="section housing-situation">
+                <h2>Housing Situation</h2>
+                <div class="question">
+                    <label for="question_7">Is your housing situation stable?</label>
+                    <input type="radio" name="responses[7]" id="question_7_yes" value="yes">
+                    <label for="question_7_yes">Yes</label>
+                    <input type="radio" name="responses[7]" id="question_7_no" value="no">
+                    <label for="question_7_no">No</label>
+                </div>
+                <div class="question">
+                    <label for="question_8">Please describe your current housing situation:</label>
+                    <textarea name="responses[8]" id="question_8"></textarea>
+                </div>
+            </div>
+            <div class="navigation">
+                <button type="button" class="back">Back</button>
+                <button type="submit" class="next">Next</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // JavaScript code for progress tracking, timeout warning, and auto-save functionality
+    </script>
+</body>
+</html>
